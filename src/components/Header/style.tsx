@@ -10,7 +10,7 @@ export const HeaderContainer = styled.header`
 export const HeaderContent = styled.div`
     width: 100%;
     max-width: 1100px;
-    margin: 2em 8rem;
+    margin: 2em 0rem;
 
     display: flex;
     justify-content: space-between;

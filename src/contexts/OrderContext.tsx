@@ -4,18 +4,14 @@ import { coffeesProps } from "../coffees";
 
 interface OrderContextType {
     order: coffeesProps[]
-    fullOrder: fullOrde
     addOnOrder: (coffee: coffeesProps) => void
+    setTotalPrice: (coffee: coffeesProps) => void
 }
 
 interface OrderContextProviderProps {
     children: ReactNode
 }
 
-interface fullOrde {
-    coffess: coffeesProps[],
-    totalPrice: number
-}
 
 export const OrderContext = createContext({} as OrderContextType)
 
@@ -39,15 +35,15 @@ export function OrderContextProvider({ children }: OrderContextProviderProps) {
         console.log(order)
     }, [order])
 
- 
 
-
-    const fullOrder: fullOrde = {
-        coffess : order,
-        totalPrice : order.reduce((acc, coffee) => {
-            acc += coffee.price * coffee.amount
-            return acc
-        }, 0)
+    function setTotalPrice(coffee: coffeesProps){
+        const updateCoffee = order.map(coffees => {
+            if (coffees.id === coffee.id) {
+                coffee.amount = coffee.amount
+            }
+            return coffees
+        })
+        setOrder(updateCoffee)
     }
 
 
@@ -56,7 +52,7 @@ return (
         value={{
             order,
             addOnOrder,
-            fullOrder
+            setTotalPrice
         }}>
         {children}
     </OrderContext.Provider>

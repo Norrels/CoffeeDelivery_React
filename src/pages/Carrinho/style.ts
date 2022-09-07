@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const CarrinhoContainer = styled.form`
+export const CarrinhoContainer = styled.main`
     width: 100%;
     margin-bottom: 4rem;
 
@@ -9,7 +9,7 @@ export const CarrinhoContainer = styled.form`
    
 `
 
-export const CarrinhoContent = styled.div`
+export const CarrinhoContent = styled.form`
     max-width: 1110px;
     display: flex;
     justify-content: space-between;

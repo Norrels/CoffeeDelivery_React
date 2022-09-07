@@ -1,7 +1,7 @@
 import { ButtonContainer, CardContainer, RemoveButton, TextContainer } from "./style";
 import Expresso from '../../../../assets/Expresso.svg'
 import { Trash } from "phosphor-react";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { OrderContext } from "../../../../contexts/OrderContext";
 import { priceFormatter } from "../../../../utils/formatter";
 import { coffeesProps } from "../../../../coffees";
@@ -11,7 +11,21 @@ interface CoffeeCardProps {
 }
 
 export function CoffeCard({order} : CoffeeCardProps) {
+    const { setTotalPrice } = useContext(OrderContext)
 
+    const [amount, setAmount] = useState(order.amount)
+    
+    function handleIncreseAmount(){
+        setAmount((state) => state + 1)
+        order.amount = order.amount + 1
+        setTotalPrice(order)
+    }
+
+    function handleDecreseAmount(){
+        setAmount((state) => state - 1)
+        order.amount = order.amount - 1
+        setTotalPrice(order)
+    }
 
     return (
         <CardContainer>
@@ -25,10 +39,13 @@ export function CoffeCard({order} : CoffeeCardProps) {
                         <span>
                             <button 
                             type="button"
-                            // onClick={handledecreseAmount}
+                            onClick={handleDecreseAmount}
                             >-</button>
-                            <p>{order.amount}</p>
-                            <button type="button" >+</button>
+                            <p>{amount}</p>
+                            <button 
+                            type="button" 
+                            onClick={handleIncreseAmount}
+                            >+</button>
                         </span>
 
                         <RemoveButton
