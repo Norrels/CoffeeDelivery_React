@@ -61,7 +61,7 @@ export function Carrinho() {
       },
       paymentMethod: data.paymentMethod,
       order: order,
-      totalPrice: totalPrice,
+      totalPrice: totalPrice.totalWithDelivery,
     };
 
     console.log(finalOrder);

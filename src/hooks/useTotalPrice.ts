@@ -8,9 +8,13 @@ export function useTotalPrice(){
     const { order } = useContext(OrderContext)
 
     const totalPrice = order.reduce((acc, coffee) => {
-        acc += coffee.price * coffee.amount
+        acc.total += coffee.price * coffee.amount
+        acc.totalWithDelivery = acc.total + 3.50
         return acc
-    }, 0)
+    }, {
+        total: 0,
+        totalWithDelivery: 0
+    })
 
     return totalPrice;
 }

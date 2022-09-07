@@ -1,10 +1,14 @@
 import { NavLink } from "react-router-dom";
 import logo from '../../assets/logo.svg'
 import { MapPin, ShoppingCart} from 'phosphor-react'
-import { HeaderContainer, HeaderContent } from "./style";
+import { HeaderContainer, HeaderContent, OrderNumber } from "./style";
+import { useContext } from "react";
+import { OrderContext } from "../../contexts/OrderContext";
 
 
 export function Header() {
+    const { order } = useContext(OrderContext)
+
     return (
        <HeaderContainer>
          <HeaderContent>
@@ -18,6 +22,7 @@ export function Header() {
                 </div>
                 <NavLink to="/carrinho">
                     <ShoppingCart size={27} color='#C47F17' weight="fill"/>
+                    {order.length > 0 && <OrderNumber>{order.length}</OrderNumber>}
                 </NavLink>
             </nav>
         </HeaderContent>

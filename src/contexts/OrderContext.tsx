@@ -6,6 +6,7 @@ interface OrderContextType {
     order: coffeesProps[]
     addOnOrder: (coffee: coffeesProps) => void
     setTotalPrice: (coffee: coffeesProps) => void
+    removeItemFromOrder: (id: string) => void
 }
 
 interface OrderContextProviderProps {
@@ -46,13 +47,22 @@ export function OrderContextProvider({ children }: OrderContextProviderProps) {
         setOrder(updateCoffee)
     }
 
+    function removeItemFromOrder(id: string){
+        const OrderWithoutDeletedOne = order.filter(order => {
+            return order.id != id
+                
+        })
+        setOrder(OrderWithoutDeletedOne)
+    }
+
 
 return (
     <OrderContext.Provider
         value={{
             order,
             addOnOrder,
-            setTotalPrice
+            setTotalPrice,
+            removeItemFromOrder
         }}>
         {children}
     </OrderContext.Provider>

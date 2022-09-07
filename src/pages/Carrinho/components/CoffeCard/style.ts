@@ -36,12 +36,18 @@ export const ButtonContainer = styled.div`
         flex-direction: row;
         align-items: center;
         gap: 0.5rem;
+        border-radius: 6px;
         background-color: ${(props) => props.theme['base-button']};
+        padding: 0 0.1rem;
 
         button {
-            color: ${(props) => props.theme['purple']};
+            background-color: ${(props) => props.theme['base-button']};
             border: none;
-            padding: 0 0.5rem;
+            height: 100%;
+            width: 1.1rem;
+            border-radius: 6px;
+
+          
         }
     }
 

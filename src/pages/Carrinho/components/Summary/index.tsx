@@ -8,12 +8,9 @@ import { ConfirmButton, PriceContainer, SummartCointainer, SummaryContent, TextC
 
 export function Summary() {
 
-    const navigate = useNavigate()
     const { order } = useContext(OrderContext)
     const totalPrice = useTotalPrice()
 
-
-    
     return (
         <SummartCointainer>
             <h2>Cafés selecionados</h2>
@@ -30,7 +27,7 @@ export function Summary() {
                 <PriceContainer>
                     <TextContent>
                         <p>Total de itens</p>
-                        <p>{priceFormatter.format(totalPrice)}</p> 
+                        <p>{priceFormatter.format(totalPrice.total)}</p> 
                     </TextContent>
                     <TextContent>
                         <p>Entrega</p>
@@ -38,7 +35,7 @@ export function Summary() {
                     </TextContent>
                     <TextContent>
                         <strong>Total</strong>
-                       <strong>{priceFormatter.format(totalPrice === 0 ? 0 : totalPrice + 3.50)}</strong>
+                       <strong>{priceFormatter.format(totalPrice.total === 0 ? 0 : totalPrice.totalWithDelivery)}</strong>
                     </TextContent>
                 </PriceContainer>
 
