@@ -22,7 +22,6 @@ export function Products({coffee} : products) {
     })
 
     useEffect(() => {
-       console.log(amount)
     }, [amount] )
 
     function handleIncreseAmount(){

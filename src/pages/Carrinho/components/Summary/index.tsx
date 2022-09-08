@@ -19,7 +19,7 @@ export function Summary() {
                 {
                     order.map(orderIndex => {
                         return (
-                            <CoffeCard order={orderIndex} key={orderIndex.id} />
+                            <CoffeCard coffee={orderIndex} key={orderIndex.id} />
                         )
                     })
                 }

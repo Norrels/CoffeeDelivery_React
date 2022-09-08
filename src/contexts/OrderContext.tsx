@@ -1,70 +1,63 @@
-import { createContext, ReactNode, useEffect, useReducer, useState } from "react";
+import {
+  createContext,
+  ReactNode,
+  useEffect,
+  useReducer,
+} from "react";
 import { coffeesProps } from "../coffees";
-
+import { addOnOrderAction, removeOnOrderAction, increseByOneAction, decreseByOneAction } from "../reducers/actions";
+import { OrderReduce } from "../reducers/reducer";
 
 interface OrderContextType {
-    order: coffeesProps[]
-    addOnOrder: (coffee: coffeesProps) => void
-    setTotalPrice: (coffee: coffeesProps) => void
-    removeItemFromOrder: (id: string) => void
+  order: coffeesProps[];
+  addOnOrder: (coffee: coffeesProps) => void;
+  increseByOne: (coffee: coffeesProps) => void;
+  decreseByOne: (coffee: coffeesProps) => void;
+  removeItemFromOrder: (id: string) => void;
 }
 
 interface OrderContextProviderProps {
-    children: ReactNode
+  children: ReactNode;
 }
 
-
-export const OrderContext = createContext({} as OrderContextType)
+export const OrderContext = createContext({} as OrderContextType);
 
 export function OrderContextProvider({ children }: OrderContextProviderProps) {
-    const [order, setOrder] = useState<coffeesProps[]>([])
+  
+    const [orderState, dispatch] = useReducer(OrderReduce, {
+    order: [],
+  });
 
-    function addOnOrder(coffee: coffeesProps) {
-        let alredyOnList = false
-        const already = order.map(coffe => {
-            if (coffee.id === coffe.id) {
-                coffee.amount = coffe.amount
-                alredyOnList = true
-            }
-            return coffe
-        })
-        alredyOnList ? setOrder(already) : setOrder([...order, coffee])
-    }
+  const { order } = orderState;
 
+  function addOnOrder(coffee: coffeesProps) {
+    dispatch(addOnOrderAction(coffee));
+  }
 
-    useEffect(() => {
-        console.log(order)
-    }, [order])
+  function removeItemFromOrder(id: string) {
+    dispatch(removeOnOrderAction(id));
+  }
 
+  function increseByOne(coffee: coffeesProps){
+    console.log("passou aqui context")
+    dispatch(increseByOneAction(coffee));
+  }
 
-    function setTotalPrice(coffee: coffeesProps){
-        const updateCoffee = order.map(coffees => {
-            if (coffees.id === coffee.id) {
-                coffee.amount = coffee.amount
-            }
-            return coffees
-        })
-        setOrder(updateCoffee)
-    }
-
-    function removeItemFromOrder(id: string){
-        const OrderWithoutDeletedOne = order.filter(order => {
-            return order.id != id
-                
-        })
-        setOrder(OrderWithoutDeletedOne)
-    }
-
-
-return (
+  function decreseByOne(coffee: coffeesProps){
+    dispatch(decreseByOneAction(coffee));
+  }
+  
+  return (
     <OrderContext.Provider
-        value={{
-            order,
-            addOnOrder,
-            setTotalPrice,
-            removeItemFromOrder
-        }}>
-        {children}
+      value={{
+        order,
+        addOnOrder,
+        removeItemFromOrder,
+        increseByOne,
+        decreseByOne
+      }}
+    >
+      {children}
     </OrderContext.Provider>
-)
+  );
 }

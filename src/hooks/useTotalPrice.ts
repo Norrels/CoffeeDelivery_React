@@ -1,6 +1,4 @@
-import { Coffee } from "phosphor-react"
 import { useContext } from "react"
-import { coffees } from "../coffees"
 import { OrderContext } from "../contexts/OrderContext"
 
 export function useTotalPrice(){
