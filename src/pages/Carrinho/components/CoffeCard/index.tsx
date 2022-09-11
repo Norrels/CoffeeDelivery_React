@@ -23,7 +23,7 @@ export function CoffeCard({ coffee }: CoffeeCardProps) {
   }
 
   function handleDecreseAmount() {
-    decreseByOne(coffee);
+    coffee.amount > 1 && decreseByOne(coffee);
   }
 
   function handleRemoveFromOrder() {

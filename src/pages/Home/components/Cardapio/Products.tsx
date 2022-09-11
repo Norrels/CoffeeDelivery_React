@@ -1,5 +1,4 @@
 import { ButtonAdd, PriceContainer, ProductsContainer, TagContainer } from "./style";
-
 import { Minus, Plus, ShoppingCart } from "phosphor-react";
 import { coffeesProps } from "../../../../coffees";
 import { useContext, useEffect, useState } from "react";
@@ -12,14 +11,7 @@ interface products {
 
 export function Products({coffee} : products) {
     const [amount, setAmount] = useState(1)
-    const { order, addOnOrder } = useContext(OrderContext)
-
-    const alreadyOnList = order.map(coffe => {
-        if(coffee.id === coffe.id) {
-            return true
-        }
-        return false
-    })
+    const { addOnOrder } = useContext(OrderContext)
 
     useEffect(() => {
     }, [amount] )
@@ -33,9 +25,7 @@ export function Products({coffee} : products) {
     }
 
     function handleAddOnOrder() {
-        alreadyOnList ? 
-        coffee.amount += amount :
-        coffee.amount = amount
+        coffee.amount += amount
         addOnOrder(coffee)
         setAmount(1)
     }

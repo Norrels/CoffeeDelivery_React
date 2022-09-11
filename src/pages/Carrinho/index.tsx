@@ -43,7 +43,7 @@ export type AdressType = z.infer<typeof adressInputs>;
 export function Carrinho() {
   const finalOrderForm = useForm<AdressType>();
   const totalPrice = useTotalPrice();
-  const { order } = useContext(OrderContext);
+  const { order, cleanOrder } = useContext(OrderContext);
   const navigate = useNavigate()
 
   const { handleSubmit } = finalOrderForm
@@ -63,10 +63,9 @@ export function Carrinho() {
       order: order,
       totalPrice: totalPrice.totalWithDelivery,
     };
-
-    console.log(finalOrder);
+    cleanOrder()
+    localStorage.setItem('order', JSON.stringify(finalOrder))
     navigate("/carrinho/sucesso")
-    
   }
 
   return (

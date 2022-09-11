@@ -1,15 +1,15 @@
 import {
   createContext,
   ReactNode,
-  useEffect,
   useReducer,
 } from "react";
 import { coffeesProps } from "../coffees";
-import { addOnOrderAction, removeOnOrderAction, increseByOneAction, decreseByOneAction } from "../reducers/actions";
+import { addOnOrderAction, removeOnOrderAction, increseByOneAction, decreseByOneAction, cleanOrderAction } from "../reducers/actions";
 import { OrderReduce } from "../reducers/reducer";
 
 interface OrderContextType {
   order: coffeesProps[];
+  cleanOrder: () => void;
   addOnOrder: (coffee: coffeesProps) => void;
   increseByOne: (coffee: coffeesProps) => void;
   decreseByOne: (coffee: coffeesProps) => void;
@@ -39,12 +39,15 @@ export function OrderContextProvider({ children }: OrderContextProviderProps) {
   }
 
   function increseByOne(coffee: coffeesProps){
-    console.log("passou aqui context")
     dispatch(increseByOneAction(coffee));
   }
 
   function decreseByOne(coffee: coffeesProps){
     dispatch(decreseByOneAction(coffee));
+  }
+
+  function cleanOrder(){
+    dispatch(cleanOrderAction())
   }
   
   return (
@@ -54,7 +57,8 @@ export function OrderContextProvider({ children }: OrderContextProviderProps) {
         addOnOrder,
         removeItemFromOrder,
         increseByOne,
-        decreseByOne
+        decreseByOne,
+        cleanOrder,
       }}
     >
       {children}

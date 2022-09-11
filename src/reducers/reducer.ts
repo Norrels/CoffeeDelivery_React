@@ -23,6 +23,9 @@ export function OrderReduce(state: OrderState, action: any) {
 
     case ActionTypes.REMOVE_ON_ORDER:
       const OrderWithoutDeletedOne = state.order.filter((order) => {
+        if(order.id === action.payload.id){
+          order.amount = 0
+        }
         return order.id != action.payload.id;
       });
       return {
@@ -31,11 +34,9 @@ export function OrderReduce(state: OrderState, action: any) {
       };
 
     case ActionTypes.INCRESE_BY_ONE:
-      console.log("Passou no reducer");
       const updateOrderIncrese = state.order.map((coffee) => {
         if (coffee.id === action.payload.coffee.id) {
           coffee.amount += 1;
-          console.log(coffee.amount);
         }
         return coffee;
       });
@@ -48,7 +49,6 @@ export function OrderReduce(state: OrderState, action: any) {
       const updateOrderDescrese = state.order.map((coffee) => {
         if (coffee.id === action.payload.coffee.id) {
           coffee.amount -= 1;
-          console.log(coffee.amount);
         }
         return coffee;
       });
@@ -56,6 +56,12 @@ export function OrderReduce(state: OrderState, action: any) {
         ...state,
         order: updateOrderDescrese,
       };
+
+      case ActionTypes.CLEAN_ORDER:
+      return {
+        ...state,
+        order: [],
+      }
 
     default:
       return state;

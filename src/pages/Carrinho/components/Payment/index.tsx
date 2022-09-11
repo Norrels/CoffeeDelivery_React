@@ -1,4 +1,3 @@
-import { set } from "immer/dist/internal";
 import {
   Bank,
   CreditCard,
@@ -6,18 +5,9 @@ import {
   MapPinLine,
   Money,
 } from "phosphor-react";
-import {
-  ChangeEvent,
-  FocusEvent,
-  FormEvent,
-  useContext,
-  useState,
-} from "react";
-import { coffeesProps } from "../../../../coffees";
-import { api } from "../../../../lib/axios";
-import * as z from "zod";
+
 import { useFormContext, Controller } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
+
 import {
   FormularioContainer,
   Input,
@@ -26,10 +16,7 @@ import {
   PagamentoContainer,
   PaymentMethodButton,
 } from "./style";
-import { useForm } from "react-hook-form";
-import { OrderContext } from "../../../../contexts/OrderContext";
-import { useTotalPrice } from "../../../../hooks/useTotalPrice";
-import { adressInputs, AdressType } from "../..";
+
 
 export function FormContainer() {
   const { register, control } = useFormContext();

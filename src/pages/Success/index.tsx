@@ -4,6 +4,13 @@ import { IconContainer } from "../Home/style";
 import { InfoContainer, InfoContext, SucessContainer, SucessWrapper, TextContainer } from "./style";
 
 export function Success() {
+    const storedOrderAsJson = localStorage.getItem('order')
+
+    let finalOrder
+    if(storedOrderAsJson){
+        finalOrder = JSON.parse(storedOrderAsJson)
+    }
+
     return (
         <SucessWrapper>
             <TextContainer>
@@ -19,8 +26,8 @@ export function Success() {
                     <InfoContext>
                         <IconContainer statusColor="coffee"><MapPin weight="fill" color="#FFF" size={30} /></IconContainer>
                         <div>
-                            <p>Entrega em Rua João Daniel Martinelli, 102 </p>
-                            <p>Farrapos - Porto Alegre, RS</p>
+                            <p>Entrega em {finalOrder.adress.rua}, {finalOrder.adress.numero} </p>
+                            <p>{finalOrder.adress.cidade} - {finalOrder.adress.uf}</p>
                         </div>
 
                     </InfoContext>
@@ -36,7 +43,7 @@ export function Success() {
                         <IconContainer statusColor="cart"><CurrencyDollar weight="fill" color="#FFF" size={30} /></IconContainer>
                         <div>
                             <p>Pagamento na entrega</p>
-                            <p>Cartão de Crédito</p>
+                            <p>{finalOrder.paymentMethod === "debito" ? "Cartão de Débito" : finalOrder.paymentMethod === "credito" ? "Cartão de Credito" : "Em dinheiro"}</p>
                         </div>
 
                     </InfoContext>

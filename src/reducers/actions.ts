@@ -5,6 +5,7 @@ export enum ActionTypes {
   REMOVE_ON_ORDER = "REMOVE_ON_ORDER",
   INCRESE_BY_ONE = "INCRESE_BY_ONE",
   DECRESE_BY_ONE = "DECRESE_BY_ONE",
+  CLEAN_ORDER = "CLEAN_ORDER"
 }
 
 export function addOnOrderAction(coffee: coffeesProps) {
@@ -41,4 +42,10 @@ export function decreseByOneAction(coffee : coffeesProps){
       coffee,
     }
   };
+}
+
+export function cleanOrderAction(){
+  return {
+    type: ActionTypes.CLEAN_ORDER,
+  }
 }

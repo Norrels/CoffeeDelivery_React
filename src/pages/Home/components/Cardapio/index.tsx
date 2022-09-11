@@ -3,6 +3,7 @@ import { CardapioContainer} from "./style";
 import { coffees } from '../../../../coffees'
 
 export function Cardapio() {
+    
     return (
         <CardapioContainer>
             <h1>Nossos Café</h1>
