@@ -1,5 +1,5 @@
 import { NavLink } from "react-router-dom";
-import logo from "../../assets/logo.svg";
+import logo from "../../assets/Logo.svg";
 import { MapPin, ShoppingCart } from "phosphor-react";
 import { HeaderContainer, HeaderContent, OrderNumber } from "./style";
 import { useContext } from "react";
